@@ -86,6 +86,21 @@ class ProductPanierView {
             contact.address = form.elements.address.value;
             contact.city = form.elements.city.value;
             contact.email = form.elements.email.value;
+            function ValidateEmail(inputText)
+                {
+                var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+                if(inputText.value.match(mailformat))
+                {
+                document.form1.text1.focus();
+                return true;
+                }
+                else
+                {
+                alert("You have entered an invalid email address!");
+                document.form1.text1.focus();
+                return false;
+                }
+                }
             event.preventDefault();
             event.stopPropagation();
             onSubmit(contact);

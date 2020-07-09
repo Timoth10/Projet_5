@@ -39,6 +39,8 @@ class ConfirmationView {
         this.orderId = JSON.parse(localStorage.getItem("orderId")); 
         this.firstName = JSON.parse(localStorage.getItem("firstName"));
         this.lastName = JSON.parse(localStorage.getItem("lastName")); 
+
+        localStorage.clear();
     }
     render() { 
         const confirmationContainer = document.createElement("div"); 
