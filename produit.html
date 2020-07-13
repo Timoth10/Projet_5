@@ -1,63 +1,112 @@
-<!doctype html>
-<html lang="fr">
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Orinoco</title>
 
-  <head>
-    <title>Orinoco, vente en ligne spécialiste de la caméra vintage</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Script -->
-    <script src="./js/request.js" defer></script>
-    <script src="./js/classes.js" defer></script>
-    <script src="./js/detail.js" defer></script>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <!-- Styles -->
-    <link rel="stylesheet" href="./css/styles.css">
-  </head>
+        <!-- Meta -->
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="title" content="Orinoco" />
+        <meta name="description" content="La vente n°1 en Europe sur une sélection d'appareils photos vintage à petits prix." />
 
-  <body>
+        <!-- CSS & Favicon -->
+        <link rel="icon" type="image/png" href="./frontend/img/favicon.ico" />
+        <link rel="stylesheet" type="text/css" href="./frontend/css/style.css" />
+    </head>
 
-    <header class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-      <a class="my-0 mr-md-auto display-1" href="index.html" target="_parent"><h1>Orinoco</h1></a>
-      <a class="btn btn-outline-primary" href="panier.html">Votre panier</a>
-    </header>
-            
-    <div class="container">
+    <body>
+        <!-- Modal -->
+        <div class="modal" id="modal">
+            <!-- Formulaire -->
+            <div class="formulaire-panier" id="formulaire">
+                <i class="fas fa-times" id="fermer-form"></i>
+                <h3>Confirmer la commande</h3>
+                <form>
+                    <label for="prenom">Prénom</label>
+                    <input type="text" id="prenom" class="input-text" />
+                    <label for="nom">Nom</label>
+                    <input type="text" id="nom" class="input-text" />
+                    <label for="mail">Adresse e-mail</label>
+                    <input type="text" id="mail" class="input-text" />
+                    <label for="adresse">Adresse postale</label>
+                    <input type="text" id="adresse" class="input-text" />
+                    <label for="code">Code postal</label>
+                    <input type="text" id="code" class="input-text" />
+                    <label for="ville">Ville</label>
+                    <input type="text" id="ville" class="input-text" />
+                    <div class="btn">Confirmer</div>
+                </form>
+            </div>
 
-      <div id="app"><!-- produit --></div> 
-
-      <footer class="pt-4 my-md-5 pt-md-5 border-top">
-        <div class="row">
-          <div class="col-12 col-md">
-            <small class="d-block mb-3 text-muted">&copy; 2020</small>
-          </div>
-          <div class="col-6 col-md">
-            <h4>Autres produits</h4>
-            <ul class="list-unstyled text-small">
-              <li><a class="text-muted" href="#">Ours en peluche</a></li>
-              <li><a class="text-muted" href="#">meubles en chêne</a></li>
-            </ul>
-          </div>
-          <div class="col-6 col-md">
-            <h4>Partenaires</h4>
-            <ul class="list-unstyled text-small">
-              <li><a class="text-muted" href="#">Devenez partenaires</a></li>
-              <li><a class="text-muted" href="#">Presse</a></li>
-            </ul>
-          </div>
-          <div class="col-6 col-md">
-            <h4>A propos</h4>
-            <ul class="list-unstyled text-small">
-              <li><a class="text-muted" href="#">Notre équipe</a></li>
-              <li><a class="text-muted" href="#">Où sommes-nous ?</a></li>
-              <li><a class="text-muted" href="#">Mentions légales</a></li>
-            </ul>
-          </div>
+            <!-- Notification -->
+            <div class="notification" id="notification">
+                <i class="fas fa-times" id="fermer-notif"></i>
+                <span id="notificationTexte"></span>
+            </div>
         </div>
-      </footer>
 
-    </div>
+        <div class="contenu">
+            
+             <!-- Header de la page -->
+            <header>
+                <img src="frontend/img/logo-orinoco.png">
+                <nav>
+                    <ul>
+                        <li><a href="./index.html">Accueil</a></li>
+                        <li><a href="./panier.html">Panier</a></li>
+                    </ul>
+                </nav>
+            </header>
 
-  </body>
+            <!-- Produit -->
+            <div class="produit-page">
+                <!-- Photo du produit -->
+                <img class="produit-photo" id="photo" alt="Appareil photo" src="./frontend/img/loading.gif" />
 
+                <!-- Prix du produit -->
+                <span class="prix" id="prix">100€</span>
+
+                <!-- Informations du produit -->
+                <div class="produit-informations">
+                    <h2>Nom de l'appareil photo</h2>
+                    <p class="lentille" id="lentilles">Lentilles: 10mm, 50mm</p>
+                    <p class="desc" id="desc">Longue description de l'appareil photo</p>
+
+                    <!-- Formulaire du produit -->
+                    <form>
+                        <label for="lentille">Couleur de la lentille:</label>
+                        <select id="lentille">
+                            <option>Noir</option>
+                            <option>Violet</option>
+                            <option>Bleu</option>
+                            <option>Vert</option>
+                            <option>Jaune</option>
+                            <option>Rouge</option>
+                            <option>Rose</option>
+                            <option>Blanc</option>
+                        </select>
+                        <div class="btn" id="panier">Ajouter au panier</div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer>
+                <ul>
+                    <li><a href="">Nous contacter</a></li>
+                    <li><a href="" target="_blank" >CGU</a></li>
+                    <li><a href="" target="_blank" >Mentions légales</a></li>
+                </ul>
+                
+        
+        </div>
+           
+
+        <!-- Scripts -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+        <script type="text/javascript" src="./frontend/js/connexion.js"></script>
+        <script type="text/javascript" src="./frontend/js/modal.js"></script>
+        <script type="text/javascript" src="./frontend/js/produit.js"></script>
+        <script src="https://kit.fontawesome.com/a8264338ad.js" crossorigin="anonymous"></script>
+    </body>
 </html>
