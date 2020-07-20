@@ -15,6 +15,7 @@ const displayCart = async () => {
   if (Object.keys(cartItems).length > 0) {
     for (let i = 0; i < Object.keys(cartItems).length; i++) {
       // Pour chaque article du panier
+      
       const itemId = Object.keys(cartItems)[i];
       const product = await getItem(itemId); // Récupère les informations du produit
       const camId = product._id; // Stocke l'id du produit
@@ -22,8 +23,10 @@ const displayCart = async () => {
       const camPrice = product.price / 100; // Stocke le prix du produit
       const camImg = product.imageUrl; // Stocke l'image du produit
       const camQuantity = cartItems[itemId].quantity;
+      const camLense = cartItems[itemId].lense;
+      console.log(camLense);
       cartInformation.products.push(camId); // Envoie l'id du produit au tableau products de cartInformation
-      renderCart(camName, camPrice, camImg, camQuantity); // Fourni l'affichage du/des produits du panier
+      renderCart(camName, camPrice, camImg, camQuantity, camLense); // Fourni l'affichage du/des produits du panier
 
       const remove = document.querySelectorAll(".remove")[i];
       const article = document.querySelectorAll("article")[i];
@@ -48,7 +51,7 @@ const getItem = async (productId) => {
   return await response.json();
 };
 // Fourni l'affichage du/des produits du panier
-const renderCart = (productName, productPrice, imgUrl, productQuantity) => {
+const renderCart = (productName, productPrice, imgUrl, productQuantity, lenseChosen) => {
   /* Affiche article(s) du panier */
   const article = document.createElement("article");
   article.innerHTML = `
@@ -56,6 +59,7 @@ const renderCart = (productName, productPrice, imgUrl, productQuantity) => {
     <div class="product-information>
         <p class="product-title">${productName}</p>
         <p class="price">${productPrice}</p>
+        <p class="option">${lenseChosen}</p>
     </div>
     <p class="quantity"><i class="fas fa-arrow-circle-left">${productQuantity}</i><i class="fas fa-arrow-circle-right"></i></p>
     <p class="remove ">supprimer</p>`;

@@ -101,6 +101,12 @@ article .price {
   margin: 0;
   color: #681548;
 }
+option {
+  text-align: center;
+  font-size: 28px;
+  margin-left: 0;
+  margin-bottom: 14px;
+}
 article .price::after {
   content: "€";
 }

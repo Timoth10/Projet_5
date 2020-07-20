@@ -63,18 +63,24 @@ const addToCart = (parentElt, productData) => {
   div.classList.add("add-to-cart");
   parentElt.appendChild(div).appendChild(btn);
 
-  // Assigne valeur à envoyer à localStorage
-  const product = {
-    id: productData._id,
-    name: productData.name,
-    price: productData.price,
-    imageUrl: productData.imageUrl,
-    quantity: 1,
-  };
+ 
+  
 
   // Envoie valeur à localStorage après un clique
   btn.addEventListener("click", () => {
     // récupérer panier localstorage
+    let lense=document.getElementById('lenses-list').value;
+     // Assigne valeur à envoyer à localStorage
+    const product = {
+      id: productData._id,
+      name: productData.name,
+      price: productData.price,
+      imageUrl: productData.imageUrl,
+      lense:lense,
+      quantity: 1,
+    };
+    console.log(product);
+    
     let panier = JSON.parse(localStorage.getItem("panier"));
     if (panier === null) {
       panier = {};
