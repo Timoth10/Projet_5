@@ -71,12 +71,13 @@ const addToCart = (parentElt, productData) => {
     // récupérer panier localstorage
     let lense=document.getElementById('lenses-list').value;
      // Assigne valeur à envoyer à localStorage
+    let lenses=[lense];
     const product = {
       id: productData._id,
       name: productData.name,
       price: productData.price,
       imageUrl: productData.imageUrl,
-      lense:lense,
+      lense:lenses,
       quantity: 1,
     };
     console.log(product);
@@ -88,9 +89,15 @@ const addToCart = (parentElt, productData) => {
     // ajouter le produit au panier
     if (panier[product.id] !== undefined) {
       panier[product.id].quantity += 1;
-    } else {
+      if(panier[product.id].lense!==lense){
+        console.log(lense);
+        console.log(panier[product.id].lense);
+        panier[product.id].lense.push('<br/>'+lense);
+      }
+    } else{
       panier[product.id] = product;
     }
+    console.log(panier);
     // update panier localstorage
     localStorage.setItem("panier", JSON.stringify(panier));
     btn.classList.add("invisible");

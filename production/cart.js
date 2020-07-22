@@ -16,8 +16,12 @@ const displayCart = async () => {
     for (let i = 0; i < Object.keys(cartItems).length; i++) {
       // Pour chaque article du panier
       
-      const itemId = Object.keys(cartItems)[i];
+      let itemId = Object.keys(cartItems)[i];
+      if(itemId.length>24){
+        itemId2=itemId.substr(1,24);
+      }
       const product = await getItem(itemId); // Récupère les informations du produit
+      console.log(product);
       const camId = product._id; // Stocke l'id du produit
       const camName = product.name; // Stocke le nom du produit
       const camPrice = product.price / 100; // Stocke le prix du produit
